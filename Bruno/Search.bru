@@ -1,0 +1,16 @@
+meta {
+  name: Search
+  type: http
+  seq: 3
+}
+
+get {
+  url: http://www.omdbapi.com/?apikey={{process.env.APIKEY}}&s=Star Wars
+  body: none
+  auth: none
+}
+
+params:query {
+  apikey: {{process.env.APIKEY}}
+  s: Star Wars
+}
