@@ -10,7 +10,7 @@ const ReviewsList = ({ reviews }) => {
           <ListGroup.Item key={review.reviewId}>
             <Link to={`/reviews/${review.reviewId}`}>{review.title} by {review.author}</Link>
             <br />
-            <p>{review.imdbID}</p> (//TODO: Link imdbID to title)
+            <p>{review.movieTitle}</p>
           </ListGroup.Item>
         ))}
       </ListGroup>

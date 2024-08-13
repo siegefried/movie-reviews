@@ -16,6 +16,7 @@ const ReviewForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     formData.imdbID = movie.imdbID;
+    formData.movieTitle = movie.Title;
     props.addReview(formData);
     setFormData(initialState);
     navigate("/reviews"); //TODO EDIT navigation

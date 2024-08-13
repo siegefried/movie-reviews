@@ -13,8 +13,8 @@ const MovieCard = (props) => {
     <>
       <Card border="secondary" style={{ width: "18rem" }}>
         <Card.Body>
-          <Card.Title>{movie.Title}</Card.Title>
-          <Card.Text>Directed by {movie.Director}</Card.Text>
+          <Card.Title>{movie?.Title}</Card.Title>
+          <Card.Text>Directed by {movie?.Director}</Card.Text>
           <Button variant="primary" onClick={handleShow}>
             More Details
           </Button>

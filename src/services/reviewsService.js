@@ -2,10 +2,10 @@ const BASE_URL = "https://api.airtable.com/v0/appu8vBIuCtiZtbwl/Table%201";
 
 const HEADERS = {
   "Content-Type": "application/json",
-  Authorization: `${import.meta.env.VITE_BACKEND_HEADER_AUTH}`,
+  Authorization: `Bearer ${import.meta.env.VITE_BACKEND_HEADER_AUTH}`,
 };
 
-export async function getData() {
+export const getData = async () => {
   try {
     const response = await fetch(BASE_URL, {
       headers: HEADERS,
@@ -24,23 +24,46 @@ export async function getData() {
   } catch (error) {
     console.error(error.message);
   }
-}
+};
 
 export const createReview = async (formData) => {
-    const payload = { fields: { ...formData } };
-    try {
-      const response = await fetch(BASE_URL, {
-        method: "POST",
-        body: JSON.stringify(payload),
-        headers: HEADERS,
-      });
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
-      }
-  
-      const json = await response.json();
-      return { id: json.id, ...json.fields };
-    } catch (error) {
-      console.error(error.message);
+  const payload = { fields: { ...formData } };
+  try {
+    const response = await fetch(BASE_URL, {
+      method: "POST",
+      body: JSON.stringify(payload),
+      headers: HEADERS,
+    });
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
     }
-  };
+
+    const json = await response.json();
+    return { id: json.id, ...json.fields };
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
+export const deleteReview = async (id) => {
+  try {
+    const response = await fetch(`${BASE_URL}/${id}`, {
+      method: "DELETE",
+      headers: HEADERS,
+    });
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const json = await response.json();
+    console.log(json);
+    // return json.records.map((record) => {
+    //   return {
+    //     id: record.id,
+    //     ...record.fields,
+    //   };
+    // });
+  } catch (error) {
+    console.error(error.message);
+  }
+};
