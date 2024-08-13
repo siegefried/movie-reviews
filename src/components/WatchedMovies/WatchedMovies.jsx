@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import MovieCard from "../MovieCard/MovieCard";
+import MovieSearch from "../MovieSearch/MovieSearch";
+import { searchMovieId } from "../../services/moviesService";
 
 const tempArr = [
   {
@@ -130,26 +132,39 @@ const tempArr = [
 
 const WatchedMovies = () => {
   const [movies, setMovies] = useState([]);
-  const favsList = ["tt0076759", "tt0080684", "tt0086190"];
-  const favsArr = [];
-  for (const fav of favsList) {
-    for (const movie of tempArr) {
-      if (fav === movie.imdbID) {
-        favsArr.push(movie);
-      }
+  const temp = [];
+  const watchedList = ["tt0076759", "tt0080684", "tt0086190"];
+  // const watchedArr = [];
+  // for (const watched of watchedList) {
+  //   for (const movie of tempArr) {
+  //     if (watched === movie.imdbID) {
+  //       watchedArr.push(movie);
+  //     }
+  //   }
+  // }
+  // console.log(watchedArr);
+
+  const loadWatched = async () => {
+    for (const watched of watchedList) {
+      const data = await searchMovieId(watched);
+      temp.push(data);
     }
-  }
-  console.log(favsArr);
-  //   setMovies(favsArr);
+    setMovies(temp);
+  };
+
+  useEffect(() => {
+    loadWatched();
+  }, []);
 
   return (
     <>
       <h3>Movies</h3>
       <Row xs={1} md={2} className="g-4">
-        <MovieCard movie={favsArr[0]} />
-        <MovieCard movie={favsArr[1]} />
-        <MovieCard movie={favsArr[2]} />
+        <MovieCard movie={movies[0]} />
+        <MovieCard movie={movies[1]} />
+        <MovieCard movie={movies[2]} />
       </Row>
+      <MovieSearch />
     </>
   );
 };

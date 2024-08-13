@@ -7,19 +7,19 @@ const MovieDetails = (props) => {
     return <>
     <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>{movie.Title}</Modal.Title>
+          <Modal.Title>{movie?.Title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <img src={movie.Poster} />
+          <img src={movie?.Poster} />
           <br />
           <br />
           <ul>
-            <li>Date Released: {movie.Released}</li>
-            <li>Writer: {movie.Writer}</li>
-            <li>Actors: {movie.Actors}</li>
-            <li>Box Office: {movie.BoxOffice}</li>
+            <li>Date Released: {movie?.Released}</li>
+            <li>Writer: {movie?.Writer}</li>
+            <li>Actors: {movie?.Actors}</li>
+            <li>Box Office: {movie?.BoxOffice}</li>
           </ul>
-          <p>{movie.Plot}</p>
+          <p>{movie?.Plot}</p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
