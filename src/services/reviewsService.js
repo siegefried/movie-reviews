@@ -26,6 +26,28 @@ export const getData = async () => {
   }
 };
 
+export const getReviewsById = async (imdbID) => {
+  const appendQuery = `?filterByFormula=imdbID%3D%22${imdbID}%22`;
+  try {
+    const response = await fetch(BASE_URL + appendQuery, {
+      headers: HEADERS,
+    });
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const json = await response.json();
+    return json.records.map((record) => {
+      return {
+        id: record.id,
+        ...record.fields,
+      };
+    });
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
 export const createReview = async (formData) => {
   const payload = { fields: { ...formData } };
   try {
@@ -56,7 +78,7 @@ export const deleteReview = async (id) => {
     }
 
     const json = await response.json();
-    console.log(json);
+    return json;
     // return json.records.map((record) => {
     //   return {
     //     id: record.id,

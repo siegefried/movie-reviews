@@ -1,0 +1,19 @@
+meta {
+  name: Get Review by imdbId
+  type: http
+  seq: 7
+}
+
+get {
+  url: https://api.airtable.com/v0/appu8vBIuCtiZtbwl/Table%201?filterByFormula=imdbID%3D%22tt0076759%22
+  body: none
+  auth: none
+}
+
+params:query {
+  filterByFormula: imdbID%3D%22tt0076759%22
+}
+
+headers {
+  Authorization: {{process.env.AIRTABLE_HEADER}}
+}

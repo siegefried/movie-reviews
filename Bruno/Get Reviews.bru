@@ -1,15 +1,30 @@
 meta {
   name: Get Reviews
   type: http
-  seq: 4
+  seq: 8
 }
 
 get {
   url: https://api.airtable.com/v0/appu8vBIuCtiZtbwl/Table%201
-  body: none
+  body: json
   auth: none
 }
 
 headers {
-  Authorization: {{process.env.OMDB_HEADER}}
+  Authorization: {{process.env.AIRTABLE_HEADER}}
+}
+
+body:json {
+  {
+      "records": [{
+          "fields": {
+              "textContent": "LoremFive\n",
+          "reviewId": 5,
+          "upvotes": 0,
+          "imdbID": "tt0086190",
+          "title": "Test5",
+          "author": "Josh"
+          }
+      }]
+  }
 }
