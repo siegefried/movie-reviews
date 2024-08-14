@@ -134,35 +134,34 @@ const WatchedMovies = () => {
   const [movies, setMovies] = useState([]);
   const temp = [];
   const watchedList = ["tt0076759", "tt0080684", "tt0086190"];
-  // const watchedArr = [];
-  // for (const watched of watchedList) {
-  //   for (const movie of tempArr) {
-  //     if (watched === movie.imdbID) {
-  //       watchedArr.push(movie);
-  //     }
-  //   }
-  // }
-  // console.log(watchedArr);
-
-  const loadWatched = async () => {
-    for (const watched of watchedList) {
-      const data = await searchMovieId(watched);
-      temp.push(data);
+  const watchedArr = [];
+  for (const watched of watchedList) {
+    for (const movie of tempArr) {
+      if (watched === movie.imdbID) {
+        watchedArr.push(movie);
+      }
     }
-    setMovies(temp);
-  };
+  }
 
-  useEffect(() => {
-    loadWatched();
-  }, []);
+  // const loadWatched = async () => {
+  //   for (const watched of watchedList) {
+  //     const data = await searchMovieId(watched);
+  //     temp.push(data);
+  //   }
+  //   setMovies(temp);
+  // };
+
+  // useEffect(() => {
+  //   loadWatched();
+  // }, []);
 
   return (
     <>
       <h3>Movies</h3>
       <Row xs={1} md={2} className="g-4">
-        <MovieCard movie={movies[0]} />
-        <MovieCard movie={movies[1]} />
-        <MovieCard movie={movies[2]} />
+        <MovieCard movie={watchedArr[0]} />
+        <MovieCard movie={watchedArr[1]} />
+        <MovieCard movie={watchedArr[2]} />
       </Row>
       <MovieSearch />
     </>

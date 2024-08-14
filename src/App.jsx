@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import SiteNavBar from "./components/SiteNavBar/SiteNavBar";
-import FavMovies from "./components/FavMovies/FavMovies";
+import FavMovies from "./components/MovieDetailsReviews/MovieDetailsReviews";
 import ReviewsList from "./components/ReviewsList/ReviewsList";
 import WatchedMovies from "./components/WatchedMovies/WatchedMovies";
 import ReviewForm from "./components/ReviewForm/ReviewForm";
@@ -9,45 +9,6 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { getData, createReview, deleteReview } from "./services/reviewsService";
 import ReviewDetails from "./components/ReviewDetails/ReviewDetails";
-
-const tempReviewsArr = [
-  {
-    reviewId: 1,
-    author: "Josh",
-    title: "Test1",
-    imdbID: "tt0076759",
-    timeCreated: 1723456553093,
-    upvotes: 0,
-    textContent: "LoremOne",
-  },
-  {
-    reviewId: 2,
-    author: "Josh",
-    title: "Test2",
-    imdbID: "tt0076759",
-    timeCreated: 1723456680169,
-    upvotes: 0,
-    textContent: "LoremTwo",
-  },
-  {
-    reviewId: 3,
-    author: "Josh",
-    title: "Test3",
-    imdbID: "tt0080684",
-    timeCreated: 1723456746171,
-    upvotes: 0,
-    textContent: "LoremThree",
-  },
-  {
-    reviewId: 4,
-    author: "Josh",
-    title: "Test4",
-    imdbID: "tt0086190",
-    timeCreated: 1723456801687,
-    upvotes: 0,
-    textContent: "LoremFour",
-  },
-];
 
 const App = () => {
   const [user, setUser] = useState("Josh");
@@ -81,7 +42,7 @@ const App = () => {
       <SiteNavBar />
       <Routes>
         <Route path="/movies" element={<WatchedMovies />}></Route>
-        <Route path="/favMovies" element={<FavMovies />}></Route>
+        <Route path="/movies/reviews/:reviewId" element={<ReviewDetails />}></Route>
         <Route
           path="/reviews"
           element={<ReviewsList reviews={reviews} />}
