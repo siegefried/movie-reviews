@@ -12,6 +12,7 @@ const MovieDetails = (props) => {
     const reviewsArr = [];
     const data = await getReviewsById(movie.imdbID);
     reviewsArr.push(...data);
+    reviewsArr.sort((a, b) => a.timeCreated - b.timeCreated);
     setReviews(reviewsArr);
   };
 
@@ -46,11 +47,9 @@ const MovieDetails = (props) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary">
-            <Link to="/reviews/new" state={{ movie: movie }}>
-              Add Review
-            </Link>
-          </Button>
+          <Link to="/reviews/new" state={{ movie: movie }}>
+            <Button variant="primary">Add Review</Button>
+          </Link>
         </Modal.Footer>
       </Modal>
     </>

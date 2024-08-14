@@ -5,17 +5,12 @@ const MovieDetailsReviews = ({ reviews }) => {
   return (
     <>
       <h3>Reviews</h3>
-      <ul>
-        {reviews?.map((review) => (
-          <li key={review.id}><Link to={`movies/reviews/${review.reviewId}`} state={{ review: review }}>{review.title}</Link></li>
-        ))} 
-      </ul>
       <ListGroup>
         {reviews.toReversed().map((review) => (
           <ListGroup.Item key={review.reviewId}>
-            <Link to={`/reviews/${review.reviewId}`}>{review.title} by {review.author}</Link>
+            <Link to={`/reviews/${review.reviewId}`} state={{ selectedReview: review }}>{review.title}</Link>
             <br />
-            <p>{review.movieTitle}</p>
+            <p>by {review.author}</p>
           </ListGroup.Item>
         ))}
       </ListGroup>

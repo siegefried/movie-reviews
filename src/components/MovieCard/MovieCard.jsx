@@ -11,7 +11,7 @@ const MovieCard = (props) => {
 
   return (
     <>
-      <Card border="secondary" style={{ width: "18rem" }}>
+      <Card border="secondary" style={{ width: "18rem" }} className="d-flex">
         <Card.Body>
           <Card.Title>{movie?.Title}</Card.Title>
           <Card.Text>Directed by {movie?.Director}</Card.Text>
@@ -21,7 +21,7 @@ const MovieCard = (props) => {
         </Card.Body>
       </Card>
 
-      <MovieDetails show={show} handleClose={handleClose} movie={movie}/>
+      <MovieDetails show={show} handleClose={handleClose} movie={movie} handleReviewChanges={props.handleReviewChanges}/>
     </>
   );
 };

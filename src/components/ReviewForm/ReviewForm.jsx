@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { Form, Button } from "react-bootstrap";
 
 const ReviewForm = (props) => {
-
   const initialState = {
     title: "",
     textContent: "",
@@ -11,7 +11,7 @@ const ReviewForm = (props) => {
   const [formData, setFormData] = useState(initialState);
   const navigate = useNavigate();
   const location = useLocation();
-  const { movie }= location.state;
+  const { movie } = location.state;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,7 +19,7 @@ const ReviewForm = (props) => {
     formData.movieTitle = movie.Title;
     props.addReview(formData);
     setFormData(initialState);
-    navigate("/reviews"); //TODO EDIT navigation
+    navigate("/movies");
   };
 
   const handleChange = ({ target }) => {
@@ -30,28 +30,41 @@ const ReviewForm = (props) => {
 
   return (
     <main>
-      <h1>New Review</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="reviewTitle">Review Title</label>
-        <input
-          id="reviewTitle"
-          type="text"
-          name="title"
-          value={formData.value}
-          onChange={handleChange}
-        />
-        <label htmlFor="reviewText">Review</label>
-        <textarea
-          id="reviewText"
-          name="textContent"
-          rows="10"
-          value={formData.value}
-          onChange={handleChange}
-        ></textarea>
-        <button type="submit" disabled={doesFormHasMissingData}>
+      <h2>New Review</h2>
+
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="reviewTitle">
+          <Form.Label>Review Title</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Come up with a good title!"
+            name="title"
+            value={formData.value}
+            onChange={handleChange}
+          />
+          <Form.Text className="text-muted">{movie.Title}</Form.Text>
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="ReviewText">
+          <Form.Label>Review</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={10}
+            placeholder="Your review goes here."
+            name="textContent"
+            value={formData.value}
+            onChange={handleChange}
+          />
+        </Form.Group>
+
+        <Button
+          variant="primary"
+          type="submit"
+          disabled={doesFormHasMissingData}
+        >
           Submit
-        </button>
-      </form>
+        </Button>
+      </Form>
     </main>
   );
 };

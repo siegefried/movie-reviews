@@ -1,16 +1,14 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
 const ReviewDetails = (props) => {
-  const { reviewId } = useParams();
   const navigate = useNavigate();
-  const selectedReview = props.reviews.find(
-    (review) => review.reviewId === Number(reviewId)
-  );
+  const location = useLocation();
+  const { selectedReview } = location.state;
 
   const handleDelete = (deletedReview) => {
     props.removeReview(deletedReview);
-    navigate("/reviews");
+    navigate("/movies");
   }
 
   return (

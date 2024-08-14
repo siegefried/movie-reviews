@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Row, CardGroup } from "react-bootstrap";
 import { searchMovieTitle } from "../../services/moviesService";
 import MovieSearchCard from "../MovieSearchCard/MovieSearchCard";
 
@@ -34,9 +34,25 @@ const MovieSearch = (props) => {
         </Button>
       </Form>
 
-      {/* {searchResults.length === 0 ? <></> :  */}
-      (<h2>Search Results</h2> {searchResults?.map((movie) => <MovieSearchCard key={movie.imdbID} movie={movie} handleAddWatched={props.handleAddWatched} watchedList={props.watchedList} /> )})
-      {/* } */}
+      {searchResults.length === 0 ? (
+        <></>
+      ) : (
+        <>
+          <h2>Search Results</h2>
+          <Row xs={1} md={3} className="g-4">
+            {searchResults?.map((movie, idx) => (
+                <CardGroup key={idx}>
+                  <MovieSearchCard
+                    key={movie.imdbID}
+                    movie={movie}
+                    handleAddWatched={props.handleAddWatched}
+                    watchedList={props.watchedList}
+                  />
+                </CardGroup>
+            ))}
+          </Row>
+        </>
+      )}
     </>
   );
 };

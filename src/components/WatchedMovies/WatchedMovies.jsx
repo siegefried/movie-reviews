@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import { Row, Col } from "react-bootstrap";
+import { Row, CardGroup } from "react-bootstrap";
 import MovieCard from "../MovieCard/MovieCard";
-import MovieSearch from "../MovieSearch/MovieSearch";
 import { searchMovieId } from "../../services/moviesService";
 
 const tempArr = [
@@ -132,38 +131,47 @@ const tempArr = [
 
 const WatchedMovies = (props) => {
   const [movies, setMovies] = useState([]);
+  const [reviewChanges, setReviewChanges] = useState(0);
   const { watchedList } = props;
   const temp = [];
-  
-  const watchedArr = [];
-  for (const watched of watchedList) {
-    for (const movie of tempArr) {
-      if (watched === movie.imdbID) {
-        watchedArr.push(movie);
-      }
-    }
+
+  // const watchedArr = [];
+  // for (const watched of watchedList) {
+  //   for (const movie of tempArr) {
+  //     if (watched === movie.imdbID) {
+  //       watchedArr.push(movie);
+  //     }
+  //   }
+  // }
+
+  const handleReviewChanges = () => {
+    setReviewChanges(reviewChanges + 1);
   }
 
-  // const loadWatched = async () => {
-  //   for (const watched of watchedList) {
-  //     const data = await searchMovieId(watched);
-  //     temp.push(data);
-  //   }
-  //   setMovies(temp);
-  // };
+  const loadWatched = async () => {
+    for (const watched of watchedList) {
+      const data = await searchMovieId(watched);
+      temp.push(data);
+    }
+    setMovies(temp);
+  };
 
-  // useEffect(() => {
-  //   loadWatched();
-  // }, []);
+  useEffect(() => {
+    loadWatched();
+  }, []);
 
   return (
     <>
-      <h3>Movies</h3>
-      <Row xs={1} md={2} className="g-4">
-        <MovieCard movie={watchedArr[0]} />
-        <MovieCard movie={watchedArr[1]} />
-        <MovieCard movie={watchedArr[2]} />
-      </Row>
+      <h2>Movies</h2>
+
+
+      <Row xs={1} md={3} className="g-4">
+        {movies?.map((movie, idx) => (
+            <CardGroup key={idx}>
+          <MovieCard key={movie.imdbID} movie={movie} handleReviewChanges={handleReviewChanges}/>
+          </CardGroup>
+        ))}
+        </Row>
     </>
   );
 };
