@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { ListGroup } from "react-bootstrap";
 
 const MovieDetailsReviews = ({ reviews }) => {
   return (
@@ -9,6 +10,15 @@ const MovieDetailsReviews = ({ reviews }) => {
           <li key={review.id}><Link to={`movies/reviews/${review.reviewId}`} state={{ review: review }}>{review.title}</Link></li>
         ))} 
       </ul>
+      <ListGroup>
+        {reviews.toReversed().map((review) => (
+          <ListGroup.Item key={review.reviewId}>
+            <Link to={`/reviews/${review.reviewId}`}>{review.title} by {review.author}</Link>
+            <br />
+            <p>{review.movieTitle}</p>
+          </ListGroup.Item>
+        ))}
+      </ListGroup>
     </>
   );
 };
