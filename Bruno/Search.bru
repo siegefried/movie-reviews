@@ -5,12 +5,12 @@ meta {
 }
 
 get {
-  url: http://www.omdbapi.com/?apikey={{process.env.APIKEY}}&s=Star Wars
+  url: http://www.omdbapi.com/?apikey={{process.env.APIKEY}}&s=inception
   body: none
   auth: none
 }
 
 params:query {
   apikey: {{process.env.APIKEY}}
-  s: Star Wars
+  s: inception
 }

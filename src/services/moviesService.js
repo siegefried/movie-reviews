@@ -10,12 +10,6 @@ export const searchMovieTitle = async (titleQuery) => {
 
     const json = await response.json();
     return json;
-    //   return json.records.map((record) => {
-    //     return {
-    //       id: record.id,
-    //       ...record.fields,
-    //     };
-    //   });
   } catch (error) {
     console.error(error.message);
   }

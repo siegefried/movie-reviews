@@ -130,10 +130,11 @@ const tempArr = [
   },
 ];
 
-const WatchedMovies = () => {
+const WatchedMovies = (props) => {
   const [movies, setMovies] = useState([]);
+  const { watchedList } = props;
   const temp = [];
-  const watchedList = ["tt0076759", "tt0080684", "tt0086190"];
+  
   const watchedArr = [];
   for (const watched of watchedList) {
     for (const movie of tempArr) {
@@ -163,7 +164,6 @@ const WatchedMovies = () => {
         <MovieCard movie={watchedArr[1]} />
         <MovieCard movie={watchedArr[2]} />
       </Row>
-      <MovieSearch />
     </>
   );
 };

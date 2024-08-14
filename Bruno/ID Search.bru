@@ -5,7 +5,12 @@ meta {
 }
 
 get {
-  url: http://www.omdbapi.com/?
+  url: http://www.omdbapi.com/?apikey={{process.env.APIKEY}}&i=tt0080684
   body: none
   auth: none
+}
+
+params:query {
+  apikey: {{process.env.APIKEY}}
+  i: tt0080684
 }
