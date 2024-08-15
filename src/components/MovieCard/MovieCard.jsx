@@ -21,7 +21,7 @@ const MovieCard = (props) => {
         </Card.Body>
       </Card>
 
-      <MovieDetails show={show} handleClose={handleClose} movie={movie} handleReviewChanges={props.handleReviewChanges}/>
+      <MovieDetails show={show} handleClose={handleClose} movie={movie} />
     </>
   );
 };
