@@ -11,7 +11,6 @@ const MovieSearchCardDetails = (props) => {
   const isMovieWatched = () => {
     return watchedList?.some((id) => id === imdbID);
   };
-  console.log(isMovieWatched());
 
   const handleClick = () => {
     handleAddWatched(imdbID);
