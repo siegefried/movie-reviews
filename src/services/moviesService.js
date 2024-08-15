@@ -1,4 +1,4 @@
-const BASE_URL = `http://www.omdbapi.com/?apikey=`;
+const BASE_URL = `https://www.omdbapi.com/?apikey=`;
 const APIKEY = `${import.meta.env.VITE_OMDB_APIKEY}`;
 
 export const searchMovieTitle = async (titleQuery) => {
@@ -16,15 +16,15 @@ export const searchMovieTitle = async (titleQuery) => {
 };
 
 export const searchMovieId = async (imdbId) => {
-    try {
-        const response = await fetch(`${BASE_URL + APIKEY}&i=${imdbId}`);
-        if (!response.ok) {
-          throw new Error(`Response status: ${response.status}`);
-        }
-    
-        const json = await response.json();
-        return json;
-      } catch (error) {
-        console.error(error.message);
-      }
-}
+  try {
+    const response = await fetch(`${BASE_URL + APIKEY}&i=${imdbId}`);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.error(error.message);
+  }
+};
