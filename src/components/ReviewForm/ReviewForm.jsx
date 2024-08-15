@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
+import { createReview } from "../../services/reviewsService";
 
 const ReviewForm = (props) => {
   const initialState = {
@@ -13,11 +14,18 @@ const ReviewForm = (props) => {
   const location = useLocation();
   const { movie } = location.state;
 
+  const addReview = (newReview) => {
+    newReview.timeCreated = Date.now();
+    newReview.author = props.user;
+    newReview.upvotes = 0;
+    createReview(newReview);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     formData.imdbID = movie.imdbID;
     formData.movieTitle = movie.Title;
-    props.addReview(formData);
+    addReview(formData);
     setFormData(initialState);
     navigate("/movies");
   };

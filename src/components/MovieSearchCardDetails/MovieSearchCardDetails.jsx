@@ -34,7 +34,7 @@ const MovieSearchCardDetails = (props) => {
           <Modal.Title>{movie?.Title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <img src={movie?.Poster} />
+          <img src={movie?.Poster} alt="movie poster" />
           <br />
           <br />
           <ul>
